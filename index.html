@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incredible India - Tourism</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #f8f9fa, #e0f7fa);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .map-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .map-container img {
+            max-width: 90%;
+            border: 5px solid #ccc;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .states {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            gap: 15px;
+        }
+
+        .state {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .state:hover {
+            background-color: #0056b3;
+        }
+
+        .places-section {
+            display: none;
+            padding: 30px;
+        }
+
+        .places-section.active {
+            display: block;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .places {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .place-box {
+            min-width: 250px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .place-box:hover {
+            transform: scale(1.05);
+        }
+
+        .place-box img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .place-box h3 {
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .blog-section {
+            padding: 30px;
+            background-color: #f1f1f1;
+            margin: 30px 0;
+        }
+
+        .blog-post {
+            margin-bottom: 20px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .blog-post img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        footer {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .booking-form {
+            margin-top: 20px;
+        }
+
+        .booking-form input, .booking-form select {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .booking-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .booking-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Incredible India - Tourism Guide
+    </header>
+
+    <div class="map-container">
+       <img src="https://static.vecteezy.com/system/resources/previews/019/932/078/non_2x/detailed-map-of-india-free-vector.jpg" alt="India Map">
+        <div class="states">
+            <button class="state" onclick="showPlaces('rajasthan')">Rajasthan</button>
+            <button class="state" onclick="showPlaces('kerala')">Kerala</button>
+            <button class="state" onclick="showPlaces('uttarpradesh')">Uttar Pradesh</button>
+            <button class="state" onclick="showPlaces('tamilnadu')">Tamil Nadu</button>
+            <button class="state" onclick="showPlaces('maharashtra')">Maharashtra</button>
+            <button class="state" onclick="showPlaces('karnataka')">Karnataka</button>
+            <button class="state" onclick="showPlaces('delhi')">Delhi</button>
+            <button class="state" onclick="showPlaces('gujarat')">Gujarat</button>
+            <button class="state" onclick="showPlaces('westbengal')">West Bengal</button>
+            <button class="state" onclick="showPlaces('himachal')">Himachal Pradesh</button>
+        </div>
+    </div>
+
+    
+    <div class="places-section" id="rajasthan">
+        <h2>Top Places to Visit in Rajasthan</h2>
+        <div class="places">
+            <div class="place-box">
+                <img src="https://imgs.search.brave.com/SGH6C5Cg7heKc3R9El5AeRjMHz195uX2OBWsNjHDuVc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy90/aHVtYi80LzQxL0Vh/c3RfZmFjYWRlX0hh/d2FfTWFoYWxfSmFp/cHVyX2Zyb21fZ3Jv/dW5kX2xldmVsXyUy/OEp1bHlfMjAyMiUy/OV8tX2ltZ18wMS5q/cGcvNTEycHgtRWFz/dF9mYWNhZGVfSGF3/YV9NYWhhbF9KYWlw/dXJfZnJvbV9ncm91/bmRfbGV2ZWxfJTI4/SnVseV8yMDIyJTI5/Xy1faW1nXzAxLmpw/Zw" alt="Hawa Mahal">
+                <h3>Hawa Mahal</h3>
+                <p>Iconic palace in Jaipur made from pink sandstone.</p>
+            </div>
+            <div class="place-box">
+                <img src="https://imgs.search.brave.com/A-kY0qrHcs3FslFcxY7_HlCp3qPMYoXWlWH_D1ht4aE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTU3/MjkwMDQzL3Bob3Rv/L21laHJhbmdhcmgt/Zm9ydC5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9SlYxOXVo/NjZobkRMY2l2TE5T/TjNoT1lmZ0xOaEdi/endhT3RJdGlBcndX/MD0" alt="Mehrangarh fort">
+                <h3>Mehrangarh Fort</h3>
+                <p>Massive fort in Jodhpur with rich cultural heritage.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="places-section" id="kerala">
+        <h2>Top Places to Visit in Kerala</h2>
+        <div class="places">
+            <div class="place-box">
+                <img src="https://imgs.search.brave.com/SbphZWS5JwhyhIQDf15CavCmhJo3Y44kZsK_kbjsXUo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc3F1YXJlc3Bh/Y2UtY2RuLmNvbS9j/b250ZW50L3YxLzUz/MTcyYjFiZTRiMGNj/OGE1NDAxZGI0YS8x/NTc4OTIwMDg4NDEw/LThOMzI5QkgzTjBN/Mko4RFNUMUw0LzJM/MUExNDEyLmpwZw" alt="Alleppey Backwaters">
+                <h3>Alleppey Backwaters</h3>
+                <p>Houseboats and peaceful backwaters in Alappuzha.</p>
+            </div>
+            <div class="place-box">
+                <img src="https://imgs.search.brave.com/TPo2_yVXVosZ_yCQZ4i55rC3dS1e0SBgyjzkf5gfv6A/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5hdWRsZXl0cmF2/ZWwuY29tLy0vbWVk/aWEvaW1hZ2VzL2hv/bWUvaW5kaWFuLXN1/YmNvbnRpbmVudC9p/bmRpYS9jb3VudHJ5/LWd1aWRlcy9rZXJh/bGEtZm9yLXRoZS1m/aXJzdC10aW1lLXZp/c2l0b3IvaXN0b2Nr/XzAwMDA2MjExMDI0/MF9tdW5uYXJfdGVh/X3BsYW5hdGlvbi5q/cGc_cT03OSZ3PTE5/MjAmaD02ODU" alt="Munnar Tea Gardens">
+                <h3>Munnar</h3>
+                <p>Hill station famous for tea gardens and misty hills.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="places-section" id="uttarpradesh">
+        <h2>Top Places to Visit in Uttar Pradesh</h2>
+        <div class="places">
+            <div class="place-box">
+                <img src="https://imgs.search.brave.com/ywVVnvGjzKbBJer4NgHXgWlMbczJg-S6kO4tzkK8JRo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvYTAw/NTItMDAwNzA4Yi9w/aG90by90YWotbWFo/YWwuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPTlTUGcyeTlP/RklPb1cxamFJbVVp/dEhndEtyMXZaeDhS/SjF0Slg5WmFYRFU9" alt="Taj Mahal">
+                <h3>Taj Mahal</h3>
+                <p>World-famous white marble mausoleum in Agra.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="places-section" id="tamilnadu">
+        <h2>Top Places to Visit in Tamil Nadu</h2>
+        <div class="places">
+            <div class="place-box">
+                <img src="https://imgs.search.brave.com/LHXGceUiuLz7cTNYyE5mzCKIA3ZVv3HJLf51pmr9NI4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZWVrc2Zvcmdl/ZWtzLm9yZy93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyMjA3MDcx/MzM0MTIvQnJpaGFk/ZXNod2FyVGVtcGxl/LmpwZw" alt="Brihadeeswara Temple">
+                <h3>Brihadeeswara Temple</h3>
+                <p>Ancient Dravidian architecture in Thanjavur.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="places-section" id="maharashtra">
+        <h2>Top Places to Visit in Maharashtra</h2>
+        <div class="places">
+            <div class="place-box">
+                <img src="https://imgs.search.brave.com/zmnDAOzhLP7_0-J23wiqHzf-jyzES15snyavthOCRJg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAwLzQ4LzI0LzEy/LzM2MF9GXzQ4MjQx/MjgyX3V3TGxMT2xy/bVpPSUFkMTIySmNU/NTVTRG9MWHg3ZVhy/LmpwZw" alt="Gateway of India">
+                <h3>Gateway of India</h3>
+                <p>Colonial-era arch monument in Mumbai.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="places-section" id="karnataka">
+        <h2>Top Places to Visit in Karnataka</h2>
+        <div class="places">
+            <div class="place-box">
+                <img src="https://imgs.search.brave.com/sx2GalvpPNDmwSSkdMYOO2KebKvkwIOWpi7e1Sfcl5Y/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dHJpcHNhdnZ5LmNv/bS90aG1iL3U1UWRj/eXJKaXRhRFNTcHVs/RUZ2Q0VPT2pIZz0v/MTUwMHgwL2ZpbHRl/cnM6bm9fdXBzY2Fs/ZSgpOm1heF9ieXRl/cygxNTAwMDApOnN0/cmlwX2ljYygpL0lN/R181MDEzLTMwZTA5/OWNmZDcxNzRlNjQ5/MGE0ODM3YTM5MzRh/MjM2LmpwZw" alt="Hampi Ruins">
+                <h3>Hampi</h3>
+                <p>UNESCO World Heritage site with ruins of Vijayanagara Empire.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="places-section" id="delhi">
+        <h2>Top Places to Visit in Delhi</h2>
+        <div class="places">
+            <div class="place-box">
+                <img src="https://imgs.search.brave.com/o8oeXWC31OQLB5hMdWnhUYa-Bh7d0e55i5k4FJlLI2E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzAxLzM1LzE0LzY4/LzM2MF9GXzEzNTE0/Njg3NF9teFA1TTVX/Q3RLbFRqUDRnakZ2/aWpkNGh1N05CV2FR/OS5qcGc" alt="India Gate">
+                <h3>India Gate</h3>
+                <p>National war memorial and iconic landmark in Delhi.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="places-section" id="gujarat">
+        <h2>Top Places to Visit in Gujarat</h2>
+        <div class="places">
+            <div class="place-box">
+                <img src="https://imgs.search.brave.com/qcUoWbb4HUOjNicwA1RfQbgge-yosKLUA93T7iVsAmo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/YXJjaHBhcGVyLmNv/bS93cC1jb250ZW50/L3VwbG9hZHMvMjAx/OC8xMS9EcTBBaFRC/WDRBTThmbVktNjQ1/eDg2MC5qcGc" alt="Statue of Unity">
+                <h3>Statue of Unity</h3>
+                <p>World's tallest statue dedicated to Sardar Vallabhbhai Patel.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="places-section" id="westbengal">
+        <h2>Top Places to Visit in West Bengal</h2>
+        <div class="places">
+            <div class="place-box">
+                <img src="https://imgs.search.brave.com/AXiEVsJfX5NXH9ZY5QlhFBlvmG98MTFw2O_j8FPGwMk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly92aWN0/b3JpYW1lbW9yaWFs/LWNhbC5vcmcvbWVk/aWEvMjAyNC8wNC9W/aWN0b3JpYS1NZW1v/cmlhbC1IYWxsLUtv/bGthdGEuanBn" alt="Victoria Memorial">
+                <h3>Victoria Memorial</h3>
+                <p>Majestic white marble building in Kolkata.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="places-section" id="himachal">
+        <h2>Top Places to Visit in Himachal Pradesh</h2>
+        <div class="places">
+            <div class="place-box">
+                <img src="https://imgs.search.brave.com/ewzYalKLielqsoulSdVbzb0MkqymF55uH2Kib92eS-w/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTUx/MTQ1ODc3L3Bob3Rv/L3NoaW1sYS1zdW5z/ZXQtY2l0eXNjYXBl/LWhpbWFjaGFsLXBy/YWRlc2guanBnP3M9/NjEyeDYxMiZ3PTAm/az0yMCZjPXNJaWI5/dk93Skp3M29Qd2N0/UlROU19pdklOMV9V/eTdDM2xKeXN1VHJS/UDQ9" alt="Shimla Town">
+                <h3>Shimla</h3>
+                <p>Popular hill station known for colonial charm and cool weather.</p>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="blog-section">
+        <h2>Travel Diaries</h2>
+        <div class="blog-post">
+            <h3>Exploring the Majestic Taj Mahal</h3>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Taj-Mahal.jpg" alt="Taj Mahal">
+            <p>The Taj Mahal, a UNESCO World Heritage Site, is one of the most iconic monuments in India. Built by Mughal Emperor Shah Jahan in memory of his wife Mumtaz Mahal, this stunning white marble mausoleum is a symbol of love and beauty. Visitors can explore its intricate architecture, lush gardens, and the serene Yamuna River that flows nearby. The best time to visit is during sunrise or sunset when the monument glows in golden hues.</p>
+        </div>
+        <div class="blog-post">
+            <h3>Adventures in the Backwaters of Kerala</h3>
+            <img src="https://imgs.search.brave.com/ktUhNPQHL4jCZlNvOgqimkN0asuhrsButM6LbMrW8aY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTM5/ODk1NDY0Mi9waG90/by9rZXJhbGEtYmFj/a3dhdGVycy5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9eWha/eDNwVTBWeTBna1hw/Rlc5N3dRcTNaSnNF/YUhvMDY3ZVdnOTlI/SUNNST0" alt="Kerala Backwaters">
+            <p>Kerala's backwaters offer a unique experience of tranquility and natural beauty. Visitors can enjoy a leisurely houseboat ride through the lush green landscapes, dotted with coconut palms and local villages. The backwaters are home to diverse wildlife and provide a glimpse into the traditional lifestyle of the locals. Don't miss the chance to savor authentic Kerala cuisine while cruising through these serene waters.</p>
+        </div>
+        <div class="blog-post">
+            <h3>Discovering the Rich Culture of Rajasthan</h3>
+            <img src="https://imgs.search.brave.com/SGH6C5Cg7heKc3R9El5AeRjMHz195uX2OBWsNjHDuVc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy90/aHVtYi80LzQxL0Vh/c3RfZmFjYWRlX0hh/d2FfTWFoYWxfSmFp/cHVyX2Zyb21fZ3Jv/dW5kX2xldmVsXyUy/OEp1bHlfMjAyMiUy/OV8tX2ltZ18wMS5q/cGcvNTEycHgtRWFz/dF9mYWNhZGVfSGF3/YV9NYWhhbF9KYWlw/dXJfZnJvbV9ncm91/bmRfbGV2ZWxfJTI4/SnVseV8yMDIyJTI5/Xy1faW1nXzAxLmpw/Zw" alt="Hawa Mahal">
+            <p>Rajasthan, known for its vibrant culture and royal heritage, is a must-visit for any traveler. The Hawa Mahal in Jaipur, with its stunning façade and intricate latticework, is a highlight of the state. Visitors can explore majestic forts, colorful markets, and experience traditional Rajasthani hospitality. Don't forget to try the local cuisine, which is rich in flavors and spices.</p>
+        </div>
+    </div>
+
+    <footer>
+        <h2>Book Your Destination Ticket</h2>
+        <form class="booking-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <select required>
+                <option value="">Select Destination</option>
+                <option value="rajasthan">Rajasthan</option>
+                <option value="kerala">Kerala</option>
+                <option value="uttarpradesh">Uttar Pradesh</option>
+                <option value="tamilnadu">Tamil Nadu</option>
+                <option value="maharashtra">Maharashtra</option>
+                <option value="karnataka">Karnataka</option>
+                <option value="delhi">Delhi</option>
+                <option value="gujarat">Gujarat</option>
+                <option value="westbengal">West Bengal</option>
+                <option value="himachal">Himachal Pradesh</option>
+            </select>
+        <button type="submit">Book Now</button>
+        </form>
+        <p>ANKIT - 24BCA10619</p>
+    </footer>
+
+    <script>
+        console.log('Script loaded - debugging started');
+        
+        function showPlaces(stateId) {
+            console.log('showPlaces called with state:', stateId);
+            
+            try {
+                const sections = document.querySelectorAll('.places-section');
+                console.log('Found', sections.length, 'sections');
+                
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                const targetSection = document.getElementById(stateId);
+                if (targetSection) {
+                    console.log('Found target section:', targetSection);
+                    targetSection.classList.add('active');
+                } else {
+                    console.error('Could not find section with id:', stateId);
+                }
+            } catch (error) {
+                console.error('Error in showPlaces:', error);
+            }
+        }
+
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM fully loaded');
+      
+            showPlaces('rajasthan');
+        });
+    </script>
+</body>
+</html>
